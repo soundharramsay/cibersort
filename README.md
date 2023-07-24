@@ -11,5 +11,7 @@ data.frame':	23684 obs. of  738 variables:
  $ Malignant.4         : num  0 313 0 0 0 ...
  $ Malignant.5         : num  0 323.528 0.927 0 0 
 
- sed -i 's/^/gene /' iN_ctrl_z8KO_gene_count_matrix.txt
+ sed '1 s/^/gene /' iN_ctrl_z8KO_gene_count_matrix.txt > temp_file.txt
+mv temp_file.txt iN_ctrl_z8KO_gene_count_matrix.txt
+
 
