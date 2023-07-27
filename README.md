@@ -1,6 +1,8 @@
 # cibersort
 
 input single cell mat 
+column ---cell name
+rows genes 
 
 data.frame':	23684 obs. of  738 variables:
  $ Gene                : chr  "C9orf152" "RPS11" "ELMO2" "CREB3L1" ...
