@@ -17,3 +17,42 @@ data.frame':	23684 obs. of  738 variables:
 mv temp_file.txt iN_ctrl_z8KO_gene_count_matrix.txt
 
 
+## cibersort output statistical test 
+
+#http://www.sthda.com/english/wiki/unpaired-two-samples-t-test-in-r
+###
+dataset<-read.csv("./Downloads/CIBERSORTx_Job6_Results_foreazyR.csv",header=T)
+colnames(dataset) <- c("celltype","cnt","cnt","cnt","e13*z8ko","e13*z8ko","e13*z8ko")
+
+library(tidyr)
+
+# Assuming your dataframe is named 'wide_df'
+tall_df <- pivot_longer(dataset, 
+                        cols = starts_with("cnt") | starts_with("e13"),
+                        names_to = "Sample",
+                        values_to = "Value")
+table(tall_df$celltype)
+
+PIEZ02_GAL_SN_df <- tall_df[tall_df$celltype == "PIEZ02_GAL_SN", ]
+
+PIEZ02_GAL_SN_df<-PIEZ02_GAL_SN_df[,-1]
+
+
+library(dplyr)
+group_by(PIEZ02_GAL_SN_df,Sample) %>%
+  summarise(
+    count = n(),
+    mean = mean(Value, na.rm = TRUE),
+    sd = sd(Value, na.rm = TRUE)
+  )
+
+# A tibble: 2 × 4
+Sample   count  mean     sd
+<chr>    <int> <dbl>  <dbl>
+  1 cnt          3 0.327 0.0471
+2 e13*z8ko     3 0.405 0.0327
+
+
+
+
+
